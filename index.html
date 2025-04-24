@@ -7,79 +7,51 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f7f7f7;
-            margin: 0;
-            padding: 0;
-        }
-        .container {
-            max-width: 600px;
-            margin: 0 auto;
+            text-align: center;
             padding: 20px;
-            background-color: white;
-            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
+            background-color: #f4f4f4;
         }
         h1 {
-            text-align: center;
-            color: #4CAF50;
+            font-size: 2em;
+            margin-bottom: 20px;
         }
-        .product {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin: 20px 0;
-            background-color: #f0f0f0;
-            padding: 10px;
-            border-radius: 8px;
-        }
-        .product button {
+        .button {
             background-color: #4CAF50;
             color: white;
-            border: none;
+            font-size: 1.2em;
             padding: 10px 20px;
-            border-radius: 5px;
+            border: none;
             cursor: pointer;
-            font-size: 16px;
-            margin-top: 10px;
+            margin: 10px;
+            border-radius: 5px;
         }
-        .product button:hover {
+        .button:hover {
             background-color: #45a049;
         }
     </style>
 </head>
 <body>
+    <h1>Welcome to the Telegram Stars Shop!</h1>
+    <p>Choose an item to purchase:</p>
 
-    <div class="container">
-        <h1>Shop with Telegram Stars</h1>
-        <div class="product">
-            <h2>Cool Car</h2>
-            <p>Get a cool car for your profile!</p>
-            <button onclick="buy('car')">Buy for 1 XTR</button>
-        </div>
-        <div class="product">
-            <h2>VIP for 1 Month</h2>
-            <p>Enjoy VIP access for a month!</p>
-            <button onclick="buy('vip')">Buy for 1 XTR</button>
-        </div>
-        <div class="product">
-            <h2>$10,000,000</h2>
-            <p>Get $10,000,000 in your account!</p>
-            <button onclick="buy('money')">Buy for 1 XTR</button>
-        </div>
-    </div>
+    <button class="button" onclick="purchase('car')">🚗 Buy Cool Car (1 Star)</button>
+    <button class="button" onclick="purchase('vip')">🌟 Buy VIP for 1 Month (2 Stars)</button>
+    <button class="button" onclick="purchase('money')">💰 Get 10,000,000$ (5 Stars)</button>
 
     <script>
-        // Ensure the Telegram WebApp API is available
-        const tWebApp = window.Telegram.WebApp;
+        // Функция отправки данных в Telegram WebApp
+        function purchase(item) {
+            const userData = {
+                item: item // Отправляем тип товара (car, vip, money)
+            };
 
-        // Function to handle the purchase
-        function buy(item) {
-            tWebApp.sendData(JSON.stringify({ item: item }));
+            // Отправка данных обратно в Telegram WebApp
+            window.Telegram.WebApp.sendData(JSON.stringify(userData));
         }
 
-        // Adjust the WebApp appearance to match the theme
-        tWebApp.expand();
+        // Ожидание, когда Telegram WebApp будет готов
+        window.Telegram.WebApp.ready();
     </script>
-
 </body>
 </html>
+
